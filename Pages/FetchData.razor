@@ -42,6 +42,8 @@ else
     protected override async Task OnInitializedAsync()
     {
         forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("sample-data/weather.json");
+        foreach (DictionaryEntry de in Environment.GetEnvironmentVariables())
+        Console.WriteLine("  {0} = {1}", de.Key, de.Value);
     }
 
     public class WeatherForecast
