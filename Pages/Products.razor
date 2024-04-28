@@ -1,0 +1,52 @@
+﻿@page "/products"
+@using GrandingWebshop.Models
+@inject HttpClient Http
+@inject javaScriptInterface jsInterface
+
+<PageTitle>Products test</PageTitle>
+
+<h1>Products test</h1>
+
+<p>This component demonstrates fetching data from the server.</p>
+
+@if (products == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>In stock</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in products)
+            {
+                <tr>
+                    <td>@product.Id</td>
+                    <td>@product.Name</td>
+                    <td>@product.Description</td>
+                    <td>@product.Amount</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private ProductModel[]? products;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Console.WriteLine("Debug 1");
+        //products = await jsInterface.Call_JS_GetProducts_Async("hi");
+        products = await jsInterface.Call_JS_GetProducts_FunctionsAsync("CAPITAL TEXT IS EASIER TO FIND");
+        Console.WriteLine("Debug 6");
+        //StateHasChanged();
+    }
+}
