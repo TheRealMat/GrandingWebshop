@@ -47,13 +47,13 @@ else
     {
         HttpResponseMessage response = await Http.GetAsync("get_products");
         string json = await response.Content.ReadAsStringAsync();
-
+        Console.WriteLine(json);
         if (json[0] != '{')
         {
             Console.WriteLine("oops not json");
             return;
         }
-        products = JsonSerializer.Deserialize<ProductModel[]>(json);
+        products = JsonSerializer.Deserialize<ProductModel[]>(json); //how do i deserialize only "the results array?"
 
         //StateHasChanged();
     }
