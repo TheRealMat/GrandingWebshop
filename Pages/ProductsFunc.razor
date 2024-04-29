@@ -46,7 +46,7 @@ else
     protected override async Task OnInitializedAsync()
     {
 
-        String? json = await Http.GetStringAsync("https://granding.dk/GetProducts");
+        String? json = await Http.GetStringAsync("/functions/GetProducts");
         Console.WriteLine(json);
         if (json[0] != '{')
         {
