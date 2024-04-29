@@ -27,7 +27,7 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (ProductModel product in products)
+            @foreach (var product in products)
             {
                 <tr>
                     <td>@product.Id</td>
@@ -56,13 +56,9 @@ else
             return;
         }
 
-        Console.WriteLine(responseModel.results[1]);
-
         products = responseModel.results;
 
-        Console.WriteLine(products[1]);
-
-        StateHasChanged();
+        //StateHasChanged();
     }
 
     public class ResponseModel
