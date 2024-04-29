@@ -2,14 +2,14 @@
 {
     public class ProductModel
     {
-        public int Id { get; set; }
+        public Int64 Id { get; set; }
 
         public string? Name { get; set; }
 
         public string? Description { get; set; }
 
-        public int Price { get; set; }
+        public Int64 Price { get; set; }
 
-        public int Amount { get; set; }
+        public Int64 Amount { get; set; }
     }
 }
