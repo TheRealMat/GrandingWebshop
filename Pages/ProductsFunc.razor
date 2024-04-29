@@ -53,9 +53,11 @@ else
 
         if (responseModel == null)
         {
+            Console.WriteLine("null (bad)");
             return;
         }
-
+        Console.WriteLine("not null (this is good)");
+        Console.WriteLine(responseModel.results[0]);
         products = responseModel.results;
 
         //StateHasChanged();
@@ -63,8 +65,8 @@ else
 
     public class ResponseModel
     {
-        Object[]? meta;
-        bool? success;
+        public Object[]? meta;
+        public bool? success;
         public ProductModel[]? results;
     }
 }
