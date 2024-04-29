@@ -11,7 +11,7 @@
 
 <p>This component demonstrates fetching data from the server.</p>
 
-@if (products == null)
+@if (root == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -27,13 +27,13 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var product in products)
+            @foreach (Result result in root.results)
             {
                 <tr>
-                    <td>@product.Id</td>
-                    <td>@product.Name</td>
-                    <td>@product.Description</td>
-                    <td>@product.Amount</td>
+                    <td>@result.Id</td>
+                    <td>@result.Name</td>
+                    <td>@result.Description</td>
+                    <td>@result.Amount</td>
                 </tr>
             }
         </tbody>
@@ -42,6 +42,7 @@ else
 
 @code {
     private ProductModel[]? products;
+    private Root? root;
 
     protected override async Task OnInitializedAsync()
     {
@@ -49,18 +50,22 @@ else
         string json = await response.Content.ReadAsStringAsync();
         Console.WriteLine(json);
 
-        ResponseModel? responseModel = JsonSerializer.Deserialize<ResponseModel>(json);
+        // ResponseModel? responseModel = JsonSerializer.Deserialize<root>(json);
 
-        if (responseModel == null)
-        {
-            Console.WriteLine("null (bad)");
-            return;
-        }
-        Console.WriteLine("not null (this is good)");
+        // if (responseModel == null)
+        // {
+        //     Console.WriteLine("null (bad)");
+        //     return;
+        // }
+        // Console.WriteLine("not null (this is good)");
 
-        products = responseModel.results;
+        // products = responseModel.results;
 
         //StateHasChanged();
+
+        root = JsonSerializer.Deserialize<Root>(json);
+
+
     }
 
     public class ResponseModel
@@ -69,4 +74,35 @@ else
         public bool? success { get; set; }
         public ProductModel[]? results { get; set; }
     }
+
+    // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
+    public class Meta
+    {
+        public string served_by { get; set; }
+        public double duration { get; set; }
+        public int changes { get; set; }
+        public int last_row_id { get; set; }
+        public bool changed_db { get; set; }
+        public int size_after { get; set; }
+        public int rows_read { get; set; }
+        public int rows_written { get; set; }
+    }
+
+    public class Result
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public int Price { get; set; }
+        public int Amount { get; set; }
+    }
+
+    public class Root
+    {
+        public bool success { get; set; }
+        public Meta meta { get; set; }
+        public List<Result> results { get; set; }
+    }
+
+
 }
