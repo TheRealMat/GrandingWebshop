@@ -1,7 +1,9 @@
 ﻿@page "/productsfunc"
 @using GrandingWebshop.Models
+@using System.Text.Json;
 @inject HttpClient Http
 @inject javaScriptInterface jsInterface
+
 
 <PageTitle>Products test</PageTitle>
 
@@ -43,10 +45,16 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        Console.WriteLine("Debug 1");
-        //products = await jsInterface.Call_JS_GetProducts_Async("hi");
-        products = await jsInterface.Call_JS_GetProducts_Functions_Async("CAPITAL TEXT IS EASIER TO FIND");
-        Console.WriteLine("Debug 6");
+
+        String? json = await Http.GetStringAsync("https://granding.dk/GetProducts");
+        Console.WriteLine(json);
+        if (json[0] != '{')
+        {
+            Console.WriteLine("oops not json");
+            return;
+        }
+        products = JsonSerializer.Deserialize<ProductModel[]>(json);
+
         //StateHasChanged();
     }
 }
