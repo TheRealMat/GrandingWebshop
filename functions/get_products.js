@@ -1,7 +1,5 @@
 export async function onRequest(context) {
-    //const preparedStatement = context.env.WebshopDB.prepare('SELECT * FROM Product LIMIT 10 OFFSET 0');
-    const preparedStatement = context.env.WebshopDB.prepare('SELECT * FROM Product');
+    const preparedStatement = context.env.WebshopDB.prepare('SELECT * FROM Product LIMIT 10 OFFSET 0');
     const data = await preparedStatement.all();
-    console.log(data);
     return Response.json(data);
 }

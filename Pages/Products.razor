@@ -1,52 +1,90 @@
 ﻿@page "/products"
 @using GrandingWebshop.Models
+@using System.Text.Json;
 @inject HttpClient Http
-@inject javaScriptInterface jsInterface
+
 
 <PageTitle>Products test</PageTitle>
 
-<h1>Products test</h1>
+<h1>Products test (functions)</h1>
 
 <p>This component demonstrates fetching data from the server.</p>
 
-@if (products == null)
+@if (root == null || root.results == null)
 {
     <p><em>Loading...</em></p>
 }
 else
 {
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>In stock</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var product in products)
-            {
-                <tr>
-                    <td>@product.Id</td>
-                    <td>@product.Name</td>
-                    <td>@product.Description</td>
-                    <td>@product.Amount</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <div class="album py-5 bg-light">
+        <div class="container">
+
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                @foreach (ProductModel product in products)
+                {
+                    <div class="col">
+                        <div class="card shadow-sm">
+                            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+
+                            <div class="card-body">
+                                <p class="card-text">@product.Name</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                    </div>
+                                    <small class="text-muted">9 mins</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
 }
 
 @code {
     private ProductModel[]? products;
+    private Root? root; // response model
 
     protected override async Task OnInitializedAsync()
     {
-        Console.WriteLine("Debug 1");
-        //products = await jsInterface.Call_JS_GetProducts_Async("hi");
-        products = await jsInterface.Call_JS_GetProducts_Async("CAPITAL TEXT IS EASIER TO FIND");
-        Console.WriteLine("Debug 6");
-        //StateHasChanged();
+        HttpResponseMessage response = await Http.GetAsync("get_products");
+        string json = await response.Content.ReadAsStringAsync();
+
+        root = JsonSerializer.Deserialize<Root>(json);
+        if (root != null)
+            products = root.results;
     }
+
+    public class Meta
+    {
+        public string? served_by { get; set; }
+        public double duration { get; set; }
+        public int changes { get; set; }
+        public int last_row_id { get; set; }
+        public bool changed_db { get; set; }
+        public int size_after { get; set; }
+        public int rows_read { get; set; }
+        public int rows_written { get; set; }
+    }
+
+    public class Result
+    {
+        public int Id { get; set; }
+        public string? Name { get; set; }
+        public string? Description { get; set; }
+        public int Price { get; set; }
+        public int Amount { get; set; }
+    }
+
+    public class Root
+    {
+        public bool success { get; set; }
+        public Meta? meta { get; set; }
+        public ProductModel[]? results { get; set; }
+    }
+
+
 }
