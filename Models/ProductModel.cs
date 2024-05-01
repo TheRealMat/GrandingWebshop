@@ -11,5 +11,7 @@
         public Int64 Price { get; set; }
 
         public Int64 Amount { get; set; }
+
+        public string? ImageUrl { get; set; }
     }
 }
