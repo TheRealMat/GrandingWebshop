@@ -50,9 +50,13 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        HttpResponseMessage response = await Http.GetAsync($"get_products{categoryId}");
+        HttpResponseMessage response = await Http.GetAsync("get_products");
         string json = await response.Content.ReadAsStringAsync();
+        if (json[0] == '<')
+            return; // this is not json
+        Console.WriteLine("successfully got json");
         Console.WriteLine(json);
+
 
         root = JsonSerializer.Deserialize<Root>(json);
     }
