@@ -52,6 +52,7 @@ else
     {
         HttpResponseMessage response = await Http.GetAsync($"get_products{categoryId}");
         string json = await response.Content.ReadAsStringAsync();
+        Console.WriteLine(json);
 
         root = JsonSerializer.Deserialize<Root>(json);
     }
