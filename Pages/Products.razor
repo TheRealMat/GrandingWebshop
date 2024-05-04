@@ -47,11 +47,11 @@ else
 @code {
     private ProductModel[]? products;
     private Root? root; // response model
-    string category = "Accessories";
+    int categoryId = 1;
 
     protected override async Task OnInitializedAsync()
     {
-        HttpResponseMessage response = await Http.GetAsync($"get_products/{category}");
+        HttpResponseMessage response = await Http.GetAsync($"get_products{categoryId}");
         string json = await response.Content.ReadAsStringAsync();
 
         root = JsonSerializer.Deserialize<Root>(json);
