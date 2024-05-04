@@ -1,7 +1,9 @@
 export async function onRequest(context) {
+    console.log("context: ");
     console.log(context);
+    console.log("context.request: ");
     console.log(context.request);
-    const preparedStatement = context.env.WebshopDB.prepare('SELECT * FROM ProductCategories INNER JOIN Product ON Product.Id = ProductCategories.Product_Id WHERE Category_Id = ? LIMIT 10 OFFSET ?').bind(context.request,0);
+    const preparedStatement = context.env.WebshopDB.prepare('SELECT * FROM ProductCategories INNER JOIN Product ON Product.Id = ProductCategories.Product_Id WHERE Category_Id = * LIMIT 20 OFFSET 0');
     const data = await preparedStatement.all();
     return Response.json(data);
 }
