@@ -4,6 +4,10 @@
     {
         public Int64 Id { get; set; }
 
+        public Int64 CategoryId { get; set; }
+
+        public Int64 ProductId { get; set; }
+
         public string? Name { get; set; }
 
         public string? Description { get; set; }

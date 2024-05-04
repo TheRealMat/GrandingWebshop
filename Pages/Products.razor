@@ -20,7 +20,7 @@ else
         <div class="container">
 
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                @foreach (ProductModel product in products)
+                @foreach (ProductModel product in root.results)
                 {
                     <div class="col">
                         <div class="card shadow-sm">
@@ -45,9 +45,8 @@ else
 }
 
 @code {
-    private ProductModel[]? products;
     private Root? root; // response model
-    int categoryId = 1;
+    int categoryId = 1; // test
 
     protected override async Task OnInitializedAsync()
     {
@@ -55,8 +54,6 @@ else
         string json = await response.Content.ReadAsStringAsync();
 
         root = JsonSerializer.Deserialize<Root>(json);
-        if (root != null)
-            products = root.results;
     }
 
     public class Meta
