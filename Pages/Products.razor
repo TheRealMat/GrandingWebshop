@@ -54,9 +54,6 @@ else
         string json = await response.Content.ReadAsStringAsync();
         if (json[0] == '<')
             return; // this is not json
-        Console.WriteLine("successfully got json");
-        Console.WriteLine(json);
-
 
         root = JsonSerializer.Deserialize<Root>(json);
     }

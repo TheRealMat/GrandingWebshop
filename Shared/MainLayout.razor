@@ -1,24 +1,51 @@
 ﻿@inherits LayoutComponentBase
 
 <div class="page">
-    <nav class="navbar navbar-light bg-light">
-        <div class="container">
-                    <a class="navbar-brand" href="#">
-            <img src="https://getbootstrap.com/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="30" height="24" class="d-inline-block align-text-top">
-            Navbar
-        </a>
-        <a class="navbar-brand" href="#">
-            <img src="https://getbootstrap.com/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="30" height="24" class="d-inline-block align-text-top">
-            Cart
-        </a>
+
+    <nav class="navbar navbar-light navbar-expand-md bg-faded justify-content-center">
+        <a href="/" class="navbar-brand d-flex w-50 mr-auto">Navbar 3</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse w-100" id="collapsingNavbar3">
+            <ul class="navbar-nav w-100 justify-content-center">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
+                <li class="nav-item"><a class="nav-link" href=""><i class="fa-brands fa-instagram"></i></a> </li>
+                <li class="nav-item"><a class="nav-link" href=""><i class="fa-solid fa-cart-shopping"></i></a> </li>
+            </ul>
         </div>
     </nav>
+
 
     <main>
             @Body
     </main>
 
-    
     <footer class="text-muted py-5">
       <div class="container">
         <p class="float-end mb-1">
@@ -30,3 +57,9 @@
     </footer>
 
 </div>
+
+@* @code{
+    enum categories{
+        Kunst, Collager, Malerier, Papirklip, Fotokunst, Print, Accessories, Tasker, Tørklæder, Nøgleringe, Smykker, Armbånd, Øreringe, Interiør, Opslagstavler, Papirlygter, ÅrstidsbestemtPynt, Jul, Påske, Halloween
+    }
+} *@
