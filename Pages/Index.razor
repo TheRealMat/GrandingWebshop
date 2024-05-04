@@ -61,20 +61,23 @@
 
 	private Root? root; // response model
 
-	protected override void OnInitialized()
+	protected override async void OnInitialized()
 	{
 		NavigationManager.LocationChanged += LocationChanged;
+		await GetCategory();
 		base.OnInitialized();
 	}
 
 	private async void LocationChanged(object sender, LocationChangedEventArgs e)
 	{
 		Console.WriteLine($"location changed to {e.Location}");
+		Console.WriteLine($"current category value: {Category}");
 		await GetCategory();
 	}
 
 	protected async Task GetCategory()
 	{
+		Console.WriteLine($"I should ask the db about {Category}");
 		Enums.categories categoryEnum = (Enums.categories)Enum.Parse(typeof(Enums.categories), Category);
 
 		HttpResponseMessage response = await Http.GetAsync($"get_products/{(int)categoryEnum + 1}");
