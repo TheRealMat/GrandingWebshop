@@ -28,9 +28,15 @@
                     <a class="nav-link" href="Interiør">Interiør</a>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item" @onmouseover="MouseOver" @onmouseout="MouseOut">
                     <a class="nav-link" href="Årstidsbestemt">Årstidsbestemt</a>
+                    <ul class="dropdown-menu @MouseOverClass">
+                        <li><a class="dropdown-item" href="Jul">Jul</a></li>
+                        <li><a class="dropdown-item" href="Halloween">Halloween</a></li>
+                        <li><a class="dropdown-item" href="Påske">Påske</a></li>
+                    </ul>
                 </li>
+
             </ul>
 
             <ul class="nav navbar-nav ml-auto w-25 justify-content-end">
@@ -82,4 +88,8 @@
 @code {
     private bool Toggle { get; set; } = false;
     private CartModal modal { get; set; }
+
+    string MouseOverClass { get; set; }
+    void MouseOver(MouseEventArgs e) { MouseOverClass = "show"; }
+    void MouseOut(MouseEventArgs e) { MouseOverClass = ""; }
 }
