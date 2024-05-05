@@ -10,7 +10,7 @@ namespace GrandingWebshop
 
         public async Task AddProductToCartAsync(ProductModel product)
         {
-			products.Add(new ProductModel());
+			products.Add(product);
 		}
     }
 }
