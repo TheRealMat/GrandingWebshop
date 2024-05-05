@@ -1,5 +1,5 @@
 export async function onRequest(context) {
-    const preparedStatement;
+    let preparedStatement;
     const contextInt = parseInt(context.params.get_products);
     if (contextInt == 0)
     {
