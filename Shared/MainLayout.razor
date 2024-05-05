@@ -1,5 +1,4 @@
 ﻿@inherits LayoutComponentBase
-
 <div class="page">
 
     <header class="container navbar navbar-light navbar-expand-md bg-faded justify-content-center">
@@ -34,13 +33,35 @@
             <ul class="nav navbar-nav ml-auto w-25 justify-content-end">
                 <li class="nav-item"><a class="nav-link" href=""><i class="fa-brands fa-instagram"></i></a> </li>
                 <li class="nav-item"><a class="nav-link" href=""><i class="fa-solid fa-cart-shopping"></i></a> </li>
+                <li class="nav-item">
+                    <a class=" btn btn-primary" @onclick="() => modal.Open()" role="button">
+                        Cart
+                    </a>
+
+                </li>
+
             </ul>
 
         </div>
+
     </header>
 
     <main>
-            @Body
+		<CartModal @ref="modal">
+			<Title>Checkout</Title>
+			<Body>
+				<p>
+                    List of products in cart here.
+				</p>
+			</Body>
+			<Footer>
+				<button type="button" class="btn btn-primary">this button does nothing...</button>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="() => modal.Close()">Close</button>
+			</Footer>
+		</CartModal>
+    
+        @Body
+
     </main>
 
     <footer class="text-muted py-5">
@@ -54,3 +75,8 @@
     </footer>
 
 </div>
+
+@code {
+    private bool Toggle { get; set; } = false;
+    private CartModal modal { get; set; }
+}
