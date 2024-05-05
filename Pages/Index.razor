@@ -4,8 +4,6 @@
 @using GrandingWebshop.Models
 @using System.Text.Json;
 @inject HttpClient Http
-@implements IDisposable
-@inject NavigationManager NavigationManager
 
 <PageTitle>Granding.dk</PageTitle>
 
@@ -61,26 +59,9 @@
 
 	private Root? root; // response model
 
-	protected override async void OnInitialized()
+	protected async Task GetCategory(int categoryId)
 	{
-		NavigationManager.LocationChanged += LocationChanged;
-		await GetCategory();
-		base.OnInitialized();
-	}
-
-	private async void LocationChanged(object sender, LocationChangedEventArgs e)
-	{
-		Console.WriteLine($"location changed to {e.Location}");
-		Console.WriteLine($"current category value: {Category}");
-		await GetCategory();
-	}
-
-	protected async Task GetCategory()
-	{
-		Console.WriteLine($"I should ask the db about {Category}");
-		Enums.categories categoryEnum = (Enums.categories)Enum.Parse(typeof(Enums.categories), Category);
-
-		HttpResponseMessage response = await Http.GetAsync($"get_products/{(int)categoryEnum + 1}");
+		HttpResponseMessage response = await Http.GetAsync($"get_products/{categoryId}");
 		string json = await response.Content.ReadAsStringAsync();
 
 		if (json[0] == '<')
@@ -89,8 +70,16 @@
 		root = JsonSerializer.Deserialize<Root>(json);
 	}
 
-	void IDisposable.Dispose()
+	protected override async Task OnParametersSetAsync()
 	{
-		NavigationManager.LocationChanged -= LocationChanged;
+		if (Category == default)
+		{
+			await GetCategory((int)Enums.categories.ALL);
+		}
+		else
+		{
+			Enums.categories categoryEnum = (Enums.categories)Enum.Parse(typeof(Enums.categories), Category);
+			await GetCategory((int)categoryEnum);
+		}
 	}
 }

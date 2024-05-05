@@ -6,6 +6,7 @@
 		// These may need to manually be assigned values eventually
 		public enum categories
 		{
+			ALL,
 			Kunst,
 			Collager,
 			Malerier,
