@@ -1,4 +1,7 @@
 ﻿@inherits LayoutComponentBase
+@inject Cart cart
+@using Models
+
 <div class="page">
 
     <header class="container navbar navbar-light navbar-expand-md bg-faded justify-content-center">
@@ -32,16 +35,13 @@
 
             <ul class="nav navbar-nav ml-auto w-25 justify-content-end">
                 <li class="nav-item"><a class="nav-link" href=""><i class="fa-brands fa-instagram"></i></a> </li>
-                <li class="nav-item"><a class="nav-link" href=""><i class="fa-solid fa-cart-shopping"></i></a> </li>
                 <li class="nav-item">
-                    <a class=" btn btn-primary" @onclick="() => modal.Open()" role="button">
-                        Cart
-                    </a>
-
+                    <button class=" btn btn-primary" @onclick="() => modal.Open()" role="button ">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span class="badge rounded-pill bg-danger">@cart.products.Count</span>
+                    </button>
                 </li>
-
             </ul>
-
         </div>
 
     </header>
@@ -50,9 +50,16 @@
 		<CartModal @ref="modal">
 			<Title>Checkout</Title>
 			<Body>
-				<p>
-                    List of products in cart here.
-				</p>
+                <ul class="list-group list-group-flush">
+                    @foreach (ProductModel product in cart.products)
+                    {
+                        <li class="list-group-item">
+                            <img src="@product.ImageUrl" class="img-thumbnail" alt="...">
+                            @product.Name
+                            @product.Price
+                        </li>
+                    }
+                </ul>
 			</Body>
 			<Footer>
 				<button type="button" class="btn btn-primary">this button does nothing...</button>
