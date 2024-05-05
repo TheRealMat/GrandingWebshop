@@ -49,8 +49,6 @@ else
 
 	private async Task AddToCart()
 	{
-		if (product.Id == 0)
-			return; // this is a placeholder card
 		await cart.AddProductToCartAsync(product);
 	}
 

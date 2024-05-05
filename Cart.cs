@@ -5,12 +5,15 @@ namespace GrandingWebshop
 {
     public class Cart
     {
-
         public List<ProductModel> products { get; set; } = new();
 
         public async Task AddProductToCartAsync(ProductModel product)
         {
 			products.Add(product);
 		}
-    }
+		public async Task RemoveFromCartAsync(ProductModel product)
+		{
+			products.Remove(product);
+		}
+	}
 }

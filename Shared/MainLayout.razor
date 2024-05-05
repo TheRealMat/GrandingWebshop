@@ -53,11 +53,7 @@
                 <ul class="list-group list-group-flush">
                     @foreach (ProductModel product in cart.products)
                     {
-                        <li class="list-group-item">
-                            <img src="@product.ImageUrl" class="img-thumbnail" alt="...">
-                            @product.Name
-                            @product.Price
-                        </li>
+                        <CartModalItem product=product></CartModalItem>
                     }
                 </ul>
 			</Body>

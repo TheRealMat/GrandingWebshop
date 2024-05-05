@@ -1,0 +1,19 @@
+﻿@inject Cart cart
+@using Models
+<li class="list-group-item">
+    <img src="@product.ImageUrl" class="img-thumbnail" alt="...">
+    <p class="@product.Name">
+        @product.Price kr.
+    </p>
+	<button @onclick="RemoveFromCart" type="button" class="btn btn-primary">Remove</button>
+</li>
+@code {
+	[Parameter, EditorRequired]
+	public ProductModel product { get; set; }
+
+	private async Task RemoveFromCart()
+	{
+		await cart.RemoveFromCartAsync(product);
+	}
+
+}
