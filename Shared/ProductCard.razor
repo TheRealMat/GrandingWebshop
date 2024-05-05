@@ -1,4 +1,5 @@
 ﻿@using Models
+@inject Cart cart
 
 <div class="col">
 	<div class="card shadow-sm">
@@ -7,8 +8,7 @@
 			<p class="card-text">@product.Name</p>
 			<div class="d-flex justify-content-between align-items-center">
 				<div class="btn-group">
-					<button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-					<button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+					<button @onclick="AddToCart" type="button" class="btn btn-sm btn-outline-secondary">Add to cart</button>
 				</div>
 				<small class="text-muted">9 mins</small>
 			</div>
@@ -18,5 +18,11 @@
 @code{
 	[Parameter, EditorRequired]
 	public ProductModel product { get; set; }
+
+	private async Task AddToCart()
+	{
+		await cart.AddProductToCartAsync(product);
+	}
+
 }
 
