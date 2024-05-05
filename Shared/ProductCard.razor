@@ -1,23 +1,56 @@
 ﻿@using Models
 @inject Cart cart
 
-<div class="col">
-	<div class="card shadow-sm">
-		<img src="@product.ImageUrl" class="card-img-top" alt="...">
-		<div class="card-body">
-			<h5 class="card-title">@product.Name</h5>
-			<p class="card-text">@product.Description</p>
-			<p class="card-text"><small class="text-muted">@product.Price kr.</small></p>
-			<button @onclick="AddToCart" type="button" class="btn btn-primary">Add to cart</button>
+@if(product != null)
+{
+	<div class="col">
+		<div class="card shadow-sm">
+			<div class="ratio ratio-4x3">
+				<img alt="Card image cap" class="card-img-top embed-responsive-item" src="@product.ImageUrl" style="object-fit: cover" />
+			</div>
+			<div class="card-body">
+				<h5 class="card-title">@product.Name</h5>
+				<p class="card-text">@product.Description</p>
+				<p class="card-text"><small class="text-muted">@product.Price kr.</small></p>
+				<button @onclick="AddToCart" type="button" class="btn btn-primary">Add to cart</button>
+			</div>
 		</div>
 	</div>
-</div>
+}
+else
+{
+	<div class="col">
+		<div class="card shadow-sm">
+			<div class="ratio ratio-4x3">
+				<img alt="Card image cap" class="card-img-top embed-responsive-item" src="placeholder.png" style="object-fit: cover" />
+			</div>
+			<div class="card-body">
+				<h5 class="card-title placeholder-glow">
+					<span class="placeholder col-6"></span>
+				</h5>
+				<p class="card-text placeholder-glow">
+					<span class="placeholder col-7"></span>
+					<span class="placeholder col-4"></span>
+					<span class="placeholder col-4"></span>
+					<span class="placeholder col-6"></span>
+					<span class="placeholder col-8"></span>
+				</p>
+
+				<button type="button" class="btn btn-primary disabled placeholder col-6"></button>
+			</div>
+		</div>
+	</div>
+}
+
 @code{
-	[Parameter, EditorRequired]
+	[Parameter]
 	public ProductModel product { get; set; }
+
 
 	private async Task AddToCart()
 	{
+		if (product.Id == 0)
+			return; // this is a placeholder card
 		await cart.AddProductToCartAsync(product);
 	}
 
