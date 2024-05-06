@@ -5,50 +5,47 @@
 <div class="page">
 
     <header class="container navbar navbar-light navbar-expand-md bg-faded justify-content-center">
+        <button class="navbar-toggler" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <ul class="collapse navbar-collapse navbar-nav justify-content-center order-md-2">
+            <li class="nav-item">
+                <a class="nav-link" href="Kunst">Kunst</a>
+            </li>
 
-        <div class="navbar-collapse collapse w-100">
-            <ul class="nav navbar-nav w-25 justify-content-start">
-                <li class="nav-item"><a class="nav-link navbar-brand" href="#">Granding.dk</a></li>
-            </ul>
+            <li class="nav-item">
+                <a class="nav-link" href="Accessories">Accesories</a>
+            </li>
 
-            <ul class="navbar-nav w-100 justify-content-center">
-                <li class="nav-item">
-                    <a class="nav-link" href="Kunst">Kunst</a>
-                </li>
+            <li class="nav-item">
+                <a class="nav-link" href="Smykker">Smykker</a>
+            </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="Accessories">Accesories</a>
-                </li>
+            <li class="nav-item">
+                <a class="nav-link" href="Interiør">Interiør</a>
+            </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="Smykker">Smykker</a>
-                </li>
+            <li class="nav-item" @onmouseover="MouseOver" @onmouseout="MouseOut">
+                <a class="nav-link" href="Årstidsbestemt">Årstidsbestemt</a>
+                <ul class="dropdown-menu @MouseOverClass">
+                    <li><a class="dropdown-item" href="Jul">Jul</a></li>
+                    <li><a class="dropdown-item" href="Halloween">Halloween</a></li>
+                    <li><a class="dropdown-item" href="Påske">Påske</a></li>
+                </ul>
+            </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="Interiør">Interiør</a>
-                </li>
-
-                <li class="nav-item" @onmouseover="MouseOver" @onmouseout="MouseOut">
-                    <a class="nav-link" href="Årstidsbestemt">Årstidsbestemt</a>
-                    <ul class="dropdown-menu @MouseOverClass">
-                        <li><a class="dropdown-item" href="Jul">Jul</a></li>
-                        <li><a class="dropdown-item" href="Halloween">Halloween</a></li>
-                        <li><a class="dropdown-item" href="Påske">Påske</a></li>
-                    </ul>
-                </li>
-
-            </ul>
-
-            <ul class="nav navbar-nav ml-auto w-25 justify-content-end">
-                <li class="nav-item"><a class="nav-link" href=""><i class="fa-brands fa-instagram"></i></a> </li>
-                <li class="nav-item">
-                    <button class=" btn btn-primary" @onclick="() => modal.Open()" role="button ">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                        <span class="badge rounded-pill bg-danger">@cart.products.Count</span>
-                    </button>
-                </li>
-            </ul>
-        </div>
+        </ul>
+        <ul class="nav navbar-nav justify-content-center order-md-1">
+            <li class="nav-item"><a class="nav-link navbar-brand" href="#">Granding.dk</a></li>
+        </ul>
+        <ul class="nav navbar-nav justify-content-center order-md-3">
+            <li class="nav-item">
+                <button class=" btn btn-primary" @onclick="() => modal.Open()" role="button ">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="badge rounded-pill bg-danger">@cart.products.Count</span>
+                </button>
+            </li>
+        </ul>
 
     </header>
 
@@ -75,11 +72,10 @@
 
     <footer class="text-muted py-5">
       <div class="container">
-        <p class="float-end mb-1">
+@*         <p class="float-end mb-1">
           <a href="#">Back to top</a>
-        </p>
-        <p class="mb-1">Album example is © Bootstrap, but please download and customize it for yourself!</p>
-        <p class="mb-0">New to Bootstrap? <a href="/">Visit the homepage</a> or read our <a href="/docs/5.1/getting-started/introduction/">getting started guide</a>.</p>
+        </p> *@
+        <a class="nav-link" href=""><i class="fa-brands fa-instagram"></i></a>
       </div>
     </footer>
 
